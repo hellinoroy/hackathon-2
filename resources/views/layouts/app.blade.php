@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="id">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evoste</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="font-sans antialiased text-gray-800">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- Header --}}
+    <header class="bg-white border-b shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            
+            {{-- Logo & Tagline --}}
+            <div>
+                <h1 class="text-2xl font-bold tracking-widest">EVOSTE</h1>
+                <p class="text-xs text-gray-500">Your scent. Their memory. Forever</p>
+            </div>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            {{-- Navigation Menu --}}
+            <nav class="flex flex-wrap justify-center md:justify-end gap-6 text-sm font-medium">
+                <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-indigo-600 transition">Our Products</a>
+                <a href="#" class="text-gray-700 hover:text-indigo-600 transition">Find Your Scent</a>
+                <a href="{{ route('about') }}" class="text-gray-700 hover:text-indigo-600 transition">About Evoste</a>
+                <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600 transition">Contact Us</a>
+            </nav>
         </div>
-    </body>
+    </header>
+
+    {{-- Main Content --}}
+    <main>
+        @yield('content')
+    </main>
+
+</body>
 </html>
