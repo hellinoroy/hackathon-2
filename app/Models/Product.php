@@ -16,6 +16,8 @@ class Product extends Model
         'notes_base',
         'main_image',
         'price',
+        'is_new',
+        'is_best_seller',
     ];
 
     // Relasi dengan tabel product_images (jika ada galeri)

@@ -7,17 +7,17 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    // Halaman katalog produk
+    // Menampilkan halaman katalog produk
     public function index()
     {
-        $products = Product::all(); // atau ->paginate(9)
+        $products = Product::with('variants')->get();
         return view('product.index', compact('products'));
     }
 
-    // Halaman detail produk
+    // Menampilkan detail produk
     public function show($slug)
     {
-        $product = Product::where('slug', $slug)->with('images')->firstOrFail();
+        $product = Product::where('slug', $slug)->with('variants')->firstOrFail();
         return view('product.show', compact('product'));
     }
 }

@@ -3,69 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cart;
+use App\Models\Product;
 
 class CartController extends Controller
 {
-
-    public function index(Request $request)
+    public function add(Request $request, $id)
     {
-        $user = $request->user();
+        $product = Product::findOrFail($id);
 
-        if (!$user) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
-        }
-        $cart = Cart::with('product')->where('user_id', $user->id)->get();
+        // Simpan ke session sebagai contoh sederhana
+        $cart = session()->get('cart', []);
 
-        return response()->json($cart);
-    }
+        $cart[$id] = [
+            "name" => $product->name,
+            "price" => $product->price,
+            "quantity" => 1,
+            "size" => $request->input('size', '35ml'),
+        ];
 
-    public function store(Request $request)
-    {
-        $user = $request->user();
-        $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
-        ]);
+        session()->put('cart', $cart);
 
-        $cartItem = Cart::where('user_id', $user->id)
-            ->where('product_id', $validated['product_id'])
-            ->first();
-        if ($cartItem) {
-            $cartItem->quantity += $validated['quantity'];
-            $cartItem->save();
-        } else {
-            $cartItem = Cart::create([
-                'user_id' => $user->id,
-                'product_id' => $validated['product_id'],
-                'quantity' => $validated['quantity'],
-            ]);
-        }
-
-        return response()->json($cartItem, 201);
-    }
-
-    public function update(Request $request, Cart $cart)
-    {
-        if ($request->user()->id !== $cart->user_id) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-        $validated = $request->validate([
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-        $cart->update($validated);
-        return response()->json($cart);
-    }
-
-
-    public function destroy(Request $request, Cart $cart)
-    {
-        if ($request->user()->id !== $cart->user_id) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
-        $cart->delete();
-        return response()->json(null, 204);
+        return redirect()->back()->with('success', 'Produk ditambahkan ke keranjang!');
     }
 }
+

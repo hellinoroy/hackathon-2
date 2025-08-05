@@ -15,14 +15,14 @@
             
             {{-- Logo & Tagline --}}
             <div>
-                <h1 class="text-2xl font-bold tracking-widest">EVOSTE</h1>
+                <a href="{{ route('home') }}" h1 class="text-2xl font-bold tracking-widest">EVOSTE</h1>
                 <p class="text-xs text-gray-500">Your scent. Their memory. Forever</p>
             </div>
 
             {{-- Navigation Menu --}}
             <nav class="flex flex-wrap justify-center md:justify-end gap-6 text-sm font-medium">
-                <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-indigo-600 transition">Our Products</a>
-                <a href="#" class="text-gray-700 hover:text-indigo-600 transition">Find Your Scent</a>
+                <a href="{{ route('our.products') }}" class="text-gray-700 hover:text-indigo-600 transition">Our Products</a>
+                <a href="{{ route('find-scent') }}" class="text-gray-700 hover:text-indigo-600 transition">Find Your Scent</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-indigo-600 transition">About Evoste</a>
                 <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600 transition">Contact Us</a>
             </nav>
