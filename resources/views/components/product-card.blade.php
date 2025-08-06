@@ -1,6 +1,6 @@
 @props(['image', 'name', 'volume', 'price', 'tags'])
 
-<div class="border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition p-4 flex flex-col items-center text-center">
+<div class="h-full border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition p-4 flex flex-col items-center text-center">
     <img src="{{ $image }}" alt="{{ $name }}" class="h-48 object-contain mb-4">
 
     <h2 class="text-base font-semibold">{{ $name }}</h2>
