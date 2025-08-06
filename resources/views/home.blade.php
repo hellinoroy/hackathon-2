@@ -56,7 +56,7 @@
 
             {{-- Produk 1: Ivory Bloom --}}
             <div class="bg-white rounded-xl p-6 shadow hover:shadow-lg transition product-card">
-                <img src="/images/products/ivory-bloom.jpg" alt="Ivory Bloom" class="rounded-lg mb-4">
+                <img src="/images/ivorybloom.png" alt="Ivory Bloom" class="rounded-lg mb-4">
                 <h3 class="text-lg font-semibold mb-1">Ivory Bloom</h3>
                 <p class="mb-2 text-gray-700 font-bold">Rp 199.000</p>
                 
@@ -87,7 +87,7 @@
 
             {{-- Produk 2: OR DU SOIR --}}
             <div class="bg-white rounded-xl p-6 shadow hover:shadow-lg transition product-card">
-                <img src="/images/products/or-du-soir.jpg" alt="OR DU SOIR" class="rounded-lg mb-4">
+                <img src="/images/ordusoir.png" alt="OR DU SOIR" class="rounded-lg mb-4">
                 <h3 class="text-lg font-semibold mb-1">OR DU SOIR</h3>
                 <p class="mb-2 text-gray-700 font-bold">Rp 199.000</p>
                 

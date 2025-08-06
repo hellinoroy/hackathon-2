@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 // Homepage
 Route::get('/', fn () => view('home'))->name('home');
@@ -46,3 +48,25 @@ Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::middleware('guest')->group(function () {
+    // Rute untuk menampilkan halaman registrasi
+    Route::get('register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+    // Rute untuk memproses data registrasi
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
+    // Rute untuk menampilkan halaman login (INI YANG ANDA TANYAKAN)
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+                ->name('login');
+
+    // Rute untuk memproses data login
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+});
+
+Route::middleware('auth')->group(function () {
+    // Rute untuk logout
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+                ->name('logout');
+});
