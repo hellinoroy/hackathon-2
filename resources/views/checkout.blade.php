@@ -29,7 +29,7 @@
                 <div class="bg-white p-6 rounded-xl shadow-md">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h2 class="text-lg font-bold text-gray-800 mb-2">Alamat Pengiriman</h2>
+                            <h2 class="text-lg font-bold text-gray-800 mb-2">Alamat Pengiriman Parfume</h2>
                             <p class="font-semibold text-gray-700">Jeannete <span class="font-normal text-gray-500">(+85) 123456789</span></p>
                             <p class="text-gray-500 text-sm mt-1">
                                 Jl. Anggrek No. 8B, RT 05 RW 03, Kelurahan Sukamaju, Kecamatan Setiabudi, Jakarta Selatan, DKI Jakarta, 1291
