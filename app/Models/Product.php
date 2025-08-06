@@ -8,16 +8,21 @@ class Product extends Model
 {
     protected $fillable = [
         'name',
-        'description',
-        'image_path',
-        'ingredient',
-        'quantity',
+        'slug',
+        'short_description',
+        'story',
+        'notes_top',
+        'notes_middle',
+        'notes_base',
+        'main_image',
         'price',
-        'category_id',
+        'is_new',
+        'is_best_seller',
     ];
 
-    public function category()
+    // Relasi dengan tabel product_images (jika ada galeri)
+    public function images()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(ProductImage::class);
     }
 }
