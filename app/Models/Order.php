@@ -9,18 +9,14 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_price',
+        'message',
         'status',
-    ];
-
-    protected $casts = [
-        'total_price' => 'decimal:2',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 
     public function details()
     {
