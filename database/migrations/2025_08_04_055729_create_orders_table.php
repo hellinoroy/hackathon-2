@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')
-                ->constrained() 
-                ->onDelete('cascade'); 
+                ->constrained()
+                ->onDelete('cascade');
 
             $table->integer('total_price');
-
+            $table->string('message')->nullable();
             $table->enum('status', ['pending', 'processing', 'completed', 'cancelled'])
                 ->default('pending');
 

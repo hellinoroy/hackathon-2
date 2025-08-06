@@ -30,11 +30,17 @@ class OrderSeeder extends Seeder
             $randomUserId = $faker->randomElement($userIds);
             $totalPrice = 0;
 
-            // Create the order
+            // Generate a random message (or leave it null for some orders)
+            $message = $faker->boolean(70)  // 70% chance of having a message
+                ? $faker->sentence(10)  // Generate a message with ~10 words
+                : null;
+
+            // Create the order with the message
             $order = Order::create([
                 'user_id' => $randomUserId,
                 'total_price' => 0, // Placeholder, will be updated later
                 'status' => $faker->randomElement(['pending', 'processing', 'completed', 'cancelled']),
+                'message' => $message,
             ]);
 
             // Keep track of products added to this order to prevent duplicates
@@ -48,12 +54,10 @@ class OrderSeeder extends Seeder
                     $randomProduct = $faker->randomElement($products);
                 } while (in_array($randomProduct->id, $addedProductIds));
 
-                // Add the product to the list of products for this order
                 $addedProductIds[] = $randomProduct->id;
 
-                // Create the order detail
                 $quantity = $faker->numberBetween(1, 3);
-                $itemPrice = $randomProduct->price; 
+                $itemPrice = $randomProduct->price;
                 $subtotal = $quantity * $itemPrice;
                 $totalPrice += $subtotal;
 
@@ -65,7 +69,7 @@ class OrderSeeder extends Seeder
                 ]);
             }
 
-            // Update the order's total price after adding all the details
+            // Update the order's total price
             $order->update(['total_price' => $totalPrice]);
         }
     }

@@ -29,12 +29,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $user = $request->user();
-
-        if (!$user) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
-        }
-        // contoh struktur data: 
         // {
         //   "products": [
         //     {
@@ -49,12 +43,20 @@ class OrderController extends Controller
         //       "id": 12,
         //       "quantity": 3
         //     }
-        //   ]
+        //   ],
+        //   "message": "Please deliver between 9 AM and 12 PM. Leave at the front door."
         // }
+        $user = $request->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+
         $validatedData = $request->validate([
             'products' => 'required|array',
             'products.*.id' => 'required|exists:products,id',
             'products.*.quantity' => 'required|integer|min:1',
+            'message' => 'nullable|string', 
         ]);
 
         try {
@@ -65,6 +67,7 @@ class OrderController extends Controller
                 'user_id' => $user->id,
                 'total_price' => 0,
                 'status' => 'pending',
+                'message' => $validatedData['message'] ?? null,
             ]);
 
             foreach ($validatedData['products'] as $productData) {
@@ -83,6 +86,7 @@ class OrderController extends Controller
 
             $order->total_price = $totalPrice;
             $order->save();
+
             DB::commit();
             $order->load('details.product');
             return response()->json($order, 201);

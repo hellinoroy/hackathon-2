@@ -9,6 +9,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\OrderController;
 
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/{product}', [ProductController::class, 'show']);
@@ -54,6 +55,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::put('/orders/{order}', [OrderController::class, 'update']);
     // Route::delete('/orders/{order}', [OrderController::class, 'destroy']);
 });
+
+
+
 // Route::get('/cart', [CartController::class, 'index']);
 
 
